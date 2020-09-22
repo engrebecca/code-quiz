@@ -1,8 +1,9 @@
-// Select DOM elements
+// SELECT DOM ELEMENTS
 // Start quiz card
-var start = document.getElementById("start");
+var startPage = document.getElementById("start");
+var startButton = document.getElementById("start-btn")
 // Question cards
-var q1 = document.getElementById("question1");
+var qPage = document.getElementById("question-pg");
 var q2 = document.getElementById("question2");
 var q3 = document.getElementById("question3");
 var q4 = document.getElementById("question4");
@@ -22,21 +23,49 @@ var highScore = document.getElementById("highScore");
 var goBack = document.getElementById("goBack");
 var clearScore = document.getElementById("clearScore");
 
-// console.log(start);
-// console.log(q1);
-// console.log(q2);
-// console.log(q3);
-// console.log(q4);
-// console.log(q5);
-// console.log(question);
-// console.log(optionA);
-// console.log(optionB);
-// console.log(optionC);
-// console.log(optionD);
-// console.log(scoreInitial);
-// console.log(score);
-// console.log(nameSubmit);
-// console.log(highScore);
-// console.log(goBack);
-// console.log(clearScore);
-console.log(name);
+// VARIABLES & OBJECTS
+var choices = [
+    {q1: "This is question 1", choiceA: "answerA", choiceB: "answerB", choiceC: "answerC", choiceD: "answerD", correct: "Correct Answer"}, 
+    {q2: "This is question 2", choiceA: "answerA", choiceB: "answerB", choiceC: "answerC", choiceD: "answerD", correct: "Correct Answer"},
+    {q3: "This is question 3", choiceA: "answerA", choiceB: "answerB", choiceC: "answerC", choiceD: "answerD", correct: "Correct Answer"},
+    {q4: "This is question 4", choiceA: "answerA", choiceB: "answerB", choiceC: "answerC", choiceD: "answerD", correct: "Correct Answer"},
+    {q5: "This is question 5", choiceA: "answerA", choiceB: "answerB", choiceC: "answerC", choiceD: "answerD", correct: "Correct Answer"},
+]
+
+qPage.style.display = "none";
+
+// FORMULAS
+// Start the quiz
+function startQuiz(){
+    console.log("Quiz started!");
+    promptQuestion();
+    startPage.style.display = "none";
+}
+
+
+// Prompt Questions
+function promptQuestion(){
+    console.log("Prompt questions");
+    qPage.style.display = "block";
+    // Pull questions and anwer from array
+
+    nextQuestion();
+}
+
+// Next Question
+function nextQuestion(){
+    console.log("Next question")
+}
+
+// Check Answer
+function checkAnswer(){
+    console.log("Checking answer");
+}
+
+// Show Score
+function showScore(){
+    console.log("Show score");
+}
+
+// EVENTS
+startButton.addEventListener("click", startQuiz)
