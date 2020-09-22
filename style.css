@@ -22,6 +22,14 @@
     display: none;
 }
 
-#scoreInitials {
+#scoreInitial {
+    display: none;
+}
+
+#highscore {
     display: block;
+}
+
+#scoreList {
+    display: none;
 }
