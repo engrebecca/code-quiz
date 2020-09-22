@@ -1,5 +1,9 @@
+#start {
+    display: none;
+}
+
 #question1 {
-    display: block;
+    display: none;
 }
 
 #question2 {
@@ -15,5 +19,5 @@
 }
 
 #question5 {
-    display: none;
+    display: block;
 }
