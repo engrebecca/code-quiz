@@ -23,13 +23,14 @@
 }
 
 #scoreInitial {
-    display: none;
-}
-
-#highscore {
     display: block;
 }
 
+#highScore {
+    display: none;
+}
+
+/* ol inside of high score leaderboard */
 #scoreList {
     display: none;
 }
