@@ -1,5 +1,5 @@
 #start {
-    display: none;
+    display: block;
 }
 
 #question1 {
@@ -23,7 +23,7 @@
 }
 
 #scoreInitial {
-    display: block;
+    display: none;
 }
 
 #highScore {
