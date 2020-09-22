@@ -19,5 +19,9 @@
 }
 
 #question5 {
+    display: none;
+}
+
+#scoreInitials {
     display: block;
 }

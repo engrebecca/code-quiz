@@ -22,7 +22,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Code Quiz</h5>
                             <p class="card-text">How well do you know how to code? Test your skills and take the quiz!</p>
-                            <button type="button" class="btn btn-info mt-3 mb-3" id="start-btn">Click to start the quiz</button>
+                            <button type="button" class="btn btn-info mt-3 mb-3" id="start-btn">Click to start</button>
                         </div>
                     </div>
                     <!-- Question 1 -->
@@ -94,7 +94,21 @@
                             <br>
                             <button type="button" class="btn btn-info mt-3 mb-3" id="optionD">Answer D</button>
                         </div>
-                    </div>                    
+                    </div>
+                    <!-- Highscore Initials -->
+                    <div class="card mx-auto mt-5" style="width: 50rem" id="scoreInitial">
+                        <div class="card-body mx-auto">
+                            <h5 class="card-title text-center">Join the Highscore Leaderboard</h5>
+                            <p class="card-text text-center">Your final score: <span id=score></span></p>
+                            <form class="form-inline">
+                                <div class="form-group mx-sm-3 mb-2">
+                                  <label for="finalScore" class="sr-only"></label>
+                                  <input type="text" class="form-control" id="finalScore" placeholder="Your Name">
+                                </div>
+                                <button class="btn btn-info mb-2">Submit</button>
+                            </form>
+                        </div>
+                    </div>                     
                 </div>
             </div>
         </div>
