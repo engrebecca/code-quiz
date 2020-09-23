@@ -10,11 +10,13 @@ var buttonB = document.getElementById("optionB");
 var buttonC = document.getElementById("optionC");
 var buttonD = document.getElementById("optionD");
 // Enter initials card
+var scorePage = document.getElementById("scorePage");
 var score = document.getElementById("score");
+var userName = document.getElementById("userName");
 var nameSubmitButton = document.getElementById("nameSubmitButton");
-var userName = document.querySelector("userName");
 // High score card
-var highScore = document.getElementById("highScore");
+var highScorePage = document.getElementById("highScorePage");
+var scoreList = document.getElementById("scoreList");
 var goBack = document.getElementById("goBack");
 var clearScore = document.getElementById("clearScore");
 
@@ -33,7 +35,10 @@ var questionText = [
     {question: "This is question 5", A: "answer5A", B: "answer5B", C: "answer5C", D: "answer5D", correct: "D"},
 ];
 
+// Set hidden pages to not display
 qPage.style.display = "none";
+scorePage.style.display = "none";
+highScorePage.style.display = "none";
 
 // Creating a timer
 // "loop"
@@ -55,10 +60,30 @@ function startTimer() {
     }, 1000);
 }
 
+// Start the quiz
+function startQuiz(){
+    console.log("Quiz started!");
+    promptQuestion();
+    startTimer();
+    startPage.style.display = "none";
+}
+
+// Prompt Questions
+function promptQuestion(){
+    qPage.style.display = "block";
+    var currentQ = questionText[currentIndex];
+    question.textContent = currentQ.question;
+    buttonA.textContent = currentQ.A;
+    buttonB.textContent = currentQ.B;
+    buttonC.textContent = currentQ.C;
+    buttonD.textContent = currentQ.D;
+}
+
+// Validate Answers
 function answerOnClick(answerId) {
     return function(event) {
         if (questionText[currentIndex].correct === answerId) {
-            scoreCounter++;
+            scoreCounter = scoreCounter + 10;
         } else {
             console.log("Time deduct!")
             // setSecondsLeft(secondsLeft - 5);
@@ -72,36 +97,58 @@ function answerOnClick(answerId) {
     }
 }
 
-// Start the quiz
-function startQuiz(){
-    console.log("Quiz started!");
-    promptQuestion();
-    startTimer();
-    startPage.style.display = "none";
-}
-
-// Prompt Questions
-function promptQuestion(){
-    console.log("Prompt questions");
-    qPage.style.display = "block";
-    var currentQ = questionText[currentIndex];
-    question.textContent = currentQ.question;
-    buttonA.textContent = currentQ.A;
-    buttonB.textContent = currentQ.B;
-    buttonC.textContent = currentQ.C;
-    buttonD.textContent = currentQ.D;
-    console.log("Index: " + currentIndex);
-}
-
 // End the quiz
 function finishQuiz() {
-    clearInterval(timerHandle);
     console.log("Quiz finished!")
+    clearInterval(timerHandle);
+    showScore();
 }
 
 // Show Score
 function showScore(){
     console.log("Show score");
+    qPage.style.display = "none";
+    scorePage.style.display = "block";
+    score.textContent = scoreCounter;
+}
+
+// Store name to board
+function storeName(event){
+    event.preventDefault();
+    console.log("Name submitted")
+    var nameInput = userName.value
+    if (nameInput !== ""){
+        localStorage.setItem("user", nameInput);
+        showHighScores();
+    } else {
+        alert("Please enter your name")
+    }
+}
+
+// Clear display for all cards
+function clearDisplay(){
+    qPage.style.display = "none";
+    scorePage.style.display = "none";
+    highScorePage.style.display = "none";
+    startPage.style.display = "none";
+} 
+
+// Show high score page
+function showHighScores(){
+    scorePage.style.display = "none";
+    highScorePage.style.display = "block";
+
+}
+
+// Return to name input page
+function goBackPage(){
+    clearDisplay();
+    scorePage.style.display = "block";
+}
+
+// Clear the score
+function clearScores(){
+    console.log("Scores cleared");
 }
 
 // EVENTS
@@ -110,3 +157,6 @@ buttonA.addEventListener("click", answerOnClick("A"));
 buttonB.addEventListener("click", answerOnClick("B"));
 buttonC.addEventListener("click", answerOnClick("C"));
 buttonD.addEventListener("click", answerOnClick("D"));
+nameSubmitButton.addEventListener("click", storeName);
+goBack.addEventListener("click", goBackPage);
+clearScore.addEventListener("click", clearScores);
