@@ -32,5 +32,5 @@
 
 /* ol inside of high score leaderboard */
 #scoreList {
-    display: none;
+    display: block;
 }

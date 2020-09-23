@@ -40,10 +40,6 @@ qPage.style.display = "none";
 scorePage.style.display = "none";
 highScorePage.style.display = "none";
 
-// Creating a timer
-// "loop"
-// store our scores
-
 // Timer Functions
 function setSecondsLeft(seconds) {
     secondsLeft = seconds;
@@ -56,6 +52,8 @@ function startTimer() {
         setSecondsLeft(secondsLeft-1);
         if (secondsLeft === 0) {
             clearInterval(timerHandle);
+            alert("You ran out of time!");
+            finishQuiz();
         }
     }, 1000);
 }
@@ -118,8 +116,12 @@ function storeName(event){
     console.log("Name submitted")
     var nameInput = userName.value
     if (nameInput !== ""){
-        localStorage.setItem("user", nameInput);
-        localStorage.setItem("score", scoreCounter);
+        // localStorage.setItem("user", nameInput);
+        // localStorage.setItem("score", scoreCounter);
+        // creat li to add to #scoreList 
+        // var listEl = document.createElement("li");
+        var nameScore = nameInput + " - " + scoreCounter;
+        localStorage.setItem("name-score", nameScore);
         showHighScores();
     } else {
         alert("Please enter your name")
@@ -130,6 +132,11 @@ function storeName(event){
 function showHighScores(){
     scorePage.style.display = "none";
     highScorePage.style.display = "block";
+    nameScore = localStorage.getItem("name-score");
+    var listEl = document.createElement("p");
+    listEl.textContent = nameScore;
+    console.log(listEl);
+    scoreList.appendChild(listEl);
 
 }
 
@@ -147,7 +154,7 @@ function goBackPage(){
 
 // Clear the score
 function clearScores(){
-    console.log("Scores cleared");
+    scoreList.textContent = "";
 }
 
 // EVENTS
