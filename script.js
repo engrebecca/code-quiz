@@ -55,7 +55,7 @@ function startTimer() {
     setSecondsLeft(totalSecondsAllowed);
     timerHandle = setInterval(function() {
         setSecondsLeft(secondsLeft-1);
-        if (secondsLeft === 0) {
+        if (secondsLeft < 0) {
             clearInterval(timerHandle);
             alert("You ran out of time!");
             finishQuiz();
@@ -74,8 +74,8 @@ function startQuiz(){
 // Prompt Questions
 function promptQuestion(){
     qPage.style.display = "block";
-    answerFlag.style.display = "none";
-    console.log(answerFlag)
+    // answerFlag.style.display = "none";
+    // console.log(answerFlag)
     var currentQ = questionText[currentIndex];
     question.textContent = currentQ.question;
     buttonA.textContent = currentQ.A;
@@ -86,23 +86,25 @@ function promptQuestion(){
 
 // Validate Answers
 function answerOnClick(answerId) {
-    if (questionText[currentIndex].correct === answerId) {
-        scoreCounter = scoreCounter + 10;
-        answerFlag.style.display = "block";
-        answerFlag.textContent = "CORRECT";
-        console.log(answerFlag);
-    } else {
-        console.log("Time deduct!")
-        setSecondsLeft(secondsLeft - 5);
-        answerFlag.style.display = "block";
-        answerFlag.textContent = "WRONG";
-        console.log(answerFlag);
-    }
-    currentIndex++;
-    if (currentIndex < questionText.length) {
-        promptQuestion();
-    } else {
-        finishQuiz();
+    return function(event){
+        if (questionText[currentIndex].correct === answerId) {
+            scoreCounter = scoreCounter + 10;
+            answerFlag.style.display = "block";
+            answerFlag.textContent = "CORRECT";
+            console.log(answerFlag);
+        } else {
+            console.log("Time deduct!")
+            setSecondsLeft(secondsLeft - 5);
+            answerFlag.style.display = "block";
+            answerFlag.textContent = "WRONG";
+            console.log(answerFlag);
+        }
+        currentIndex++;
+        if (currentIndex < questionText.length) {
+            promptQuestion();
+        } else {
+            finishQuiz();
+        }
     }
 }
 
@@ -111,6 +113,7 @@ function answerOnClick(answerId) {
 function finishQuiz() {
     console.log("Quiz finished!")
     clearInterval(timerHandle);
+    timerDisplay.textContent = "0";
     showScore();
 }
 
@@ -165,7 +168,7 @@ function clearScores(){
     scoreList.textContent = "";
 }
 
-// View high Score page from link
+// View high Score page from corner button
 function viewScores(){
     startPage.style.display = "none";
     qPage.style.display = "none";
@@ -176,18 +179,10 @@ function viewScores(){
 }
 // EVENTS
 startButton.addEventListener("click", startQuiz);
-buttonA.addEventListener("click", function(event) {
-    answerOnClick("A")
-});
-buttonB.addEventListener("click", function(event){
-    answerOnClick("B")
-});
-buttonC.addEventListener("click", function(event){
-    answerOnClick("C")
-});
-buttonD.addEventListener("click", function(event){
-    answerOnClick("D")
-});
+buttonA.addEventListener("click", answerOnClick("A"));
+buttonB.addEventListener("click", answerOnClick("B"));
+buttonC.addEventListener("click", answerOnClick("C"));
+buttonD.addEventListener("click", answerOnClick("D"));
 nameSubmitButton.addEventListener("click", storeName);
 goBack.addEventListener("click", goBackPage);
 clearScore.addEventListener("click", clearScores);
