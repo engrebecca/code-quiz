@@ -21,10 +21,11 @@ var goBack = document.getElementById("goBack");
 var clearScore = document.getElementById("clearScore");
 // Nav bar
 var viewHighScore = document.getElementById("viewHighScore");
+var timerDisplay = document.getElementById("timerDisplay");
 
 // VARIABLES & OBJECTS
-var totalSecondsAllowed = 5;
-var secondsLeft = 0;
+var totalSecondsAllowed = 30;
+var secondsLeft;
 var timerHandle;
 var scoreCounter = 0;
 var currentIndex = 0;
@@ -46,6 +47,7 @@ highScorePage.style.display = "none";
 function setSecondsLeft(seconds) {
     secondsLeft = seconds;
     console.log(secondsLeft);
+    timerDisplay.textContent = secondsLeft;
 }
 
 function startTimer() {
@@ -86,7 +88,7 @@ function answerOnClick(answerId) {
             scoreCounter = scoreCounter + 10;
         } else {
             console.log("Time deduct!")
-            // setSecondsLeft(secondsLeft - 5);
+            setSecondsLeft(secondsLeft - 5);
         }
         currentIndex++;
         if (currentIndex < questionText.length) {
