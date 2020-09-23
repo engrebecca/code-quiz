@@ -119,19 +119,12 @@ function storeName(event){
     var nameInput = userName.value
     if (nameInput !== ""){
         localStorage.setItem("user", nameInput);
+        localStorage.setItem("score", scoreCounter);
         showHighScores();
     } else {
         alert("Please enter your name")
     }
 }
-
-// Clear display for all cards
-function clearDisplay(){
-    qPage.style.display = "none";
-    scorePage.style.display = "none";
-    highScorePage.style.display = "none";
-    startPage.style.display = "none";
-} 
 
 // Show high score page
 function showHighScores(){
@@ -142,8 +135,14 @@ function showHighScores(){
 
 // Return to name input page
 function goBackPage(){
-    clearDisplay();
-    scorePage.style.display = "block";
+    qPage.style.display = "none";
+    scorePage.style.display = "none";
+    highScorePage.style.display = "none";
+    startPage.style.display = "block";
+    totalSecondsAllowed = 5;
+    secondsLeft = 0;
+    scoreCounter = 0;
+    currentIndex = 0;
 }
 
 // Clear the score
