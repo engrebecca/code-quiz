@@ -19,6 +19,8 @@ var highScorePage = document.getElementById("highScorePage");
 var scoreList = document.getElementById("scoreList");
 var goBack = document.getElementById("goBack");
 var clearScore = document.getElementById("clearScore");
+// Nav bar
+var viewHighScore = document.getElementById("viewHighScore");
 
 // VARIABLES & OBJECTS
 var totalSecondsAllowed = 5;
@@ -116,12 +118,9 @@ function storeName(event){
     console.log("Name submitted")
     var nameInput = userName.value
     if (nameInput !== ""){
-        // localStorage.setItem("user", nameInput);
-        // localStorage.setItem("score", scoreCounter);
-        // creat li to add to #scoreList 
-        // var listEl = document.createElement("li");
         var nameScore = nameInput + " - " + scoreCounter;
         localStorage.setItem("name-score", nameScore);
+        userName.value = "";
         showHighScores();
     } else {
         alert("Please enter your name")
@@ -157,6 +156,14 @@ function clearScores(){
     scoreList.textContent = "";
 }
 
+// View high Score page from link
+function viewScores(){
+    startPage.style.display = "none";
+    qPage.style.display = "none";
+    scorePage.style.display = "none";
+    highScorePage.style.display = "block";
+    clearInterval(timerHandle);
+}
 // EVENTS
 startButton.addEventListener("click", startQuiz);
 buttonA.addEventListener("click", answerOnClick("A"));
@@ -166,3 +173,4 @@ buttonD.addEventListener("click", answerOnClick("D"));
 nameSubmitButton.addEventListener("click", storeName);
 goBack.addEventListener("click", goBackPage);
 clearScore.addEventListener("click", clearScores);
+viewHighScore.addEventListener("click", viewScores);
