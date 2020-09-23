@@ -19,9 +19,10 @@ var highScorePage = document.getElementById("highScorePage");
 var scoreList = document.getElementById("scoreList");
 var goBack = document.getElementById("goBack");
 var clearScore = document.getElementById("clearScore");
-// Nav bar
+// Nav bar / other
 var viewHighScore = document.getElementById("viewHighScore");
 var timerDisplay = document.getElementById("timerDisplay");
+var answerFlag = document.getElementById("answerFlag");
 
 // VARIABLES & OBJECTS
 var totalSecondsAllowed = 30;
@@ -73,6 +74,8 @@ function startQuiz(){
 // Prompt Questions
 function promptQuestion(){
     qPage.style.display = "block";
+    answerFlag.style.display = "none";
+    console.log(answerFlag)
     var currentQ = questionText[currentIndex];
     question.textContent = currentQ.question;
     buttonA.textContent = currentQ.A;
@@ -83,21 +86,26 @@ function promptQuestion(){
 
 // Validate Answers
 function answerOnClick(answerId) {
-    return function(event) {
-        if (questionText[currentIndex].correct === answerId) {
-            scoreCounter = scoreCounter + 10;
-        } else {
-            console.log("Time deduct!")
-            setSecondsLeft(secondsLeft - 5);
-        }
-        currentIndex++;
-        if (currentIndex < questionText.length) {
-            promptQuestion();
-        } else {
-            finishQuiz();
-        }
+    if (questionText[currentIndex].correct === answerId) {
+        scoreCounter = scoreCounter + 10;
+        answerFlag.style.display = "block";
+        answerFlag.textContent = "CORRECT";
+        console.log(answerFlag);
+    } else {
+        console.log("Time deduct!")
+        setSecondsLeft(secondsLeft - 5);
+        answerFlag.style.display = "block";
+        answerFlag.textContent = "WRONG";
+        console.log(answerFlag);
+    }
+    currentIndex++;
+    if (currentIndex < questionText.length) {
+        promptQuestion();
+    } else {
+        finishQuiz();
     }
 }
+
 
 // End the quiz
 function finishQuiz() {
@@ -147,8 +155,7 @@ function goBackPage(){
     scorePage.style.display = "none";
     highScorePage.style.display = "none";
     startPage.style.display = "block";
-    totalSecondsAllowed = 5;
-    secondsLeft = 0;
+    setSecondsLeft(0);
     scoreCounter = 0;
     currentIndex = 0;
 }
@@ -165,13 +172,22 @@ function viewScores(){
     scorePage.style.display = "none";
     highScorePage.style.display = "block";
     clearInterval(timerHandle);
+    setSecondsLeft(0);
 }
 // EVENTS
 startButton.addEventListener("click", startQuiz);
-buttonA.addEventListener("click", answerOnClick("A"));
-buttonB.addEventListener("click", answerOnClick("B"));
-buttonC.addEventListener("click", answerOnClick("C"));
-buttonD.addEventListener("click", answerOnClick("D"));
+buttonA.addEventListener("click", function(event) {
+    answerOnClick("A")
+});
+buttonB.addEventListener("click", function(event){
+    answerOnClick("B")
+});
+buttonC.addEventListener("click", function(event){
+    answerOnClick("C")
+});
+buttonD.addEventListener("click", function(event){
+    answerOnClick("D")
+});
 nameSubmitButton.addEventListener("click", storeName);
 goBack.addEventListener("click", goBackPage);
 clearScore.addEventListener("click", clearScores);

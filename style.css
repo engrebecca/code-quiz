@@ -34,3 +34,7 @@
 #scoreList {
     display: block;
 }
+
+#answerFlag {
+    display:none;
+}
