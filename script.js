@@ -25,18 +25,23 @@ var timerDisplay = document.getElementById("timerDisplay");
 var answerFlag = document.getElementById("answerFlag");
 
 // VARIABLES & OBJECTS
-var totalSecondsAllowed = 30;
+var totalSecondsAllowed = 60;
 var secondsLeft;
 var timerHandle;
 var scoreCounter = 0;
 var currentIndex = 0;
 
 var questionText = [
-    {question: "This is question 1", A: "answer1A", B: "answer1B", C: "answer1C", D: "answer1D", correct: "A"}, 
-    {question: "This is question 2", A: "answer2A", B: "answer2B", C: "answer2C", D: "answer2D", correct: "B"},
-    {question: "This is question 3", A: "answer3A", B: "answer3B", C: "answer3C", D: "answer3D", correct: "C"},
-    {question: "This is question 4", A: "answer4A", B: "answer4B", C: "answer4C", D: "answer4D", correct: "A"},
-    {question: "This is question 5", A: "answer5A", B: "answer5B", C: "answer5C", D: "answer5D", correct: "D"},
+    {question: "What is the name of the street Harry Potter and the Dursleys lived on?", A: "Privet Drive", B: "Lilly Lane", C: "Coldwater Street", D: "Surrey Lane", correct: "A"}, 
+    {question: "What Hogwarts house is Draco Malfoy in?", A: "Gryffindor", B: "Ravenclaw", C: "Slytherin", D: "Hufflepuff", correct: "C"},
+    {question: "What country is Beauxbatons located in?", A: "Spain", B: "Switzerland", C: "Belgium", D: "France", correct: "D"},
+    {question: "What position does Harry play on his Quidditch team?", A: "Chaser", B: "Seeker", C: "Beater", D: "Keeper", correct: "B"},
+    {question: "What does the Imperius Curse do?", A: "Kills", B: "Controls", C: "Tortures", D: "Burns", correct: "B"},
+    {question: "What horcrux was inside Bellatrix Lastrange's vault in Gringotts?", A: "Ravenclaw's Diadem", B: "Gaunt's Ring", C: "Hufflepuff's Cup", D: "Slytherin's Lockett", correct: "C"},
+    {question: "What is Harry's Patronus?", A: "A Doe", B: "A Wolf", C: "A Lion", D: "A Stag", correct: "D"},
+    {question: "Which is not a method of transportation for wizards?", A: "Apparation", B: "A Portkey", C: "Transfiguration", D: "Floo Powder", correct: "C"},
+    {question: "What is the name of Hagrid's dragon?", A: "Fluffy", B: "Norbert", C: "Skrewt", D: "Norris", correct: "B"},
+    {question: "Which is not an ingredient in Polyjuice Potion?", A: "Dragon Blood", B: "Shredded Boomslang Skin", C: "Lacewing Flies", D: "Knotgrass", correct: "A"},
 ];
 
 // Set hidden pages to not display
@@ -47,7 +52,6 @@ highScorePage.style.display = "none";
 // Timer Functions
 function setSecondsLeft(seconds) {
     secondsLeft = seconds;
-    console.log(secondsLeft);
     timerDisplay.textContent = secondsLeft;
 }
 
@@ -56,6 +60,7 @@ function startTimer() {
     timerHandle = setInterval(function() {
         setSecondsLeft(secondsLeft-1);
         if (secondsLeft < 0) {
+            timerDisplay.textContent = "0";
             clearInterval(timerHandle);
             alert("You ran out of time!");
             finishQuiz();
@@ -65,7 +70,6 @@ function startTimer() {
 
 // Start the quiz
 function startQuiz(){
-    console.log("Quiz started!");
     promptQuestion();
     startTimer();
     startPage.style.display = "none";
@@ -74,8 +78,6 @@ function startQuiz(){
 // Prompt Questions
 function promptQuestion(){
     qPage.style.display = "block";
-    // answerFlag.style.display = "none";
-    // console.log(answerFlag)
     var currentQ = questionText[currentIndex];
     question.textContent = currentQ.question;
     buttonA.textContent = currentQ.A;
@@ -89,15 +91,10 @@ function answerOnClick(answerId) {
     return function(event){
         if (questionText[currentIndex].correct === answerId) {
             scoreCounter = scoreCounter + 10;
-            answerFlag.style.display = "block";
             answerFlag.textContent = "CORRECT";
-            console.log(answerFlag);
         } else {
-            console.log("Time deduct!")
             setSecondsLeft(secondsLeft - 5);
-            answerFlag.style.display = "block";
             answerFlag.textContent = "WRONG";
-            console.log(answerFlag);
         }
         currentIndex++;
         if (currentIndex < questionText.length) {
@@ -111,15 +108,14 @@ function answerOnClick(answerId) {
 
 // End the quiz
 function finishQuiz() {
-    console.log("Quiz finished!")
     clearInterval(timerHandle);
     timerDisplay.textContent = "0";
+    answerFlag.textContent = " ";
     showScore();
 }
 
 // Show Score
 function showScore(){
-    console.log("Show score");
     qPage.style.display = "none";
     scorePage.style.display = "block";
     score.textContent = scoreCounter;
@@ -128,7 +124,6 @@ function showScore(){
 // Store name to board
 function storeName(event){
     event.preventDefault();
-    console.log("Name submitted")
     var nameInput = userName.value
     if (nameInput !== ""){
         var nameScore = nameInput + " - " + scoreCounter;
@@ -147,7 +142,6 @@ function showHighScores(){
     nameScore = localStorage.getItem("name-score");
     var listEl = document.createElement("p");
     listEl.textContent = nameScore;
-    console.log(listEl);
     scoreList.appendChild(listEl);
 
 }
@@ -158,6 +152,7 @@ function goBackPage(){
     scorePage.style.display = "none";
     highScorePage.style.display = "none";
     startPage.style.display = "block";
+    answerFlag.textContent = " ";
     setSecondsLeft(0);
     scoreCounter = 0;
     currentIndex = 0;
