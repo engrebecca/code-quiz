@@ -8,14 +8,14 @@ The Harry Potter Quiz features a 60 second timer and 10 multiple-choice question
 ## Features
 The quiz uses JavaScript to manipulate the Document Object Model (DOM) and dynamically update HTML and CSS. This allows players to interact with the webpage by clicking buttons to prompt changes.
 * The DOM getElementByID() method is used to create hooks for  JavaScript to manipulate the HTML and CSS.
-* The DOM style property is used to change the style of HTML/CSS elements, like hiding and showing elements.
+* The DOM style property is used to change the style of HTML and CSS elements, like hiding and showing elements.
 * The DOM addEventListener() method is used to call functions when buttons are clicked on the page.
 
 A timer counts down from 60 seconds notifying the player how much time is left on the clock. 
 * The setInterval and clearInterval methods are used to set the timer and clear the timer when the game is over or the clock runs out.
 
 Players can save their initials to the high score board at the end of the game.
-* The localStorage property is used to save player names and high scores to the high score list. This allows multiple players to play and save their data in the browser session.
+* The localStorage property is used to save player names and scores to the high score list. This allows multiple players to play and save their data in the browser session.
 
 ## Built With
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - used to create the dynamic features of the page
