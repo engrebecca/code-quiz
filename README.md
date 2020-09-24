@@ -1,7 +1,7 @@
 # ⚡ Harry Potter Quiz ⚡
 
 ## Summary
-Put your knowledge of Harry Potter to the test with this quiz!
+Are you a fan of Harry Potter? Put your knowledge of the series to the test with this quiz!
 
 The Harry Potter Quiz features a 60 second timer and 10 multiple-choice questions. 10 points are awarded for every correct answer. 5 seconds are deducted from the timer for each incorrect answer. Beat the clock and try to get a new high score.
 
@@ -15,7 +15,7 @@ A timer counts down from 60 seconds notifying the player how much time is left o
 * The setInterval and clearInterval methods are used to set the timer and clear the timer when the game is over or the clock runs out.
 
 Players can save their initials to the high score board at the end of the game.
-* The localStorage property is used to save they player's name and score to the high score list.
+* The localStorage property is used to save a player's name and score to the high score list.
 
 ## Built With
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - used to create the dynamic features of the page
