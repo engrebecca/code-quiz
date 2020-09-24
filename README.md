@@ -15,7 +15,7 @@ A timer counts down from 60 seconds notifying the player how much time is left o
 * The setInterval and clearInterval methods are used to set the timer and clear the timer when the game is over or the clock runs out.
 
 Players can save their initials to the high score board at the end of the game.
-* The localStorage property is used to save player names and scores to the high score list. This allows multiple players to play and save their data in the browser session.
+* The localStorage property is used to save they player's name and score to the high score list.
 
 ## Built With
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - used to create the dynamic features of the page
@@ -27,34 +27,6 @@ Players can save their initials to the high score board at the end of the game.
 
 ## Deployed Link
 [Harry Potter Quiz](https://engrebecca.github.io/code-quiz/)
-
-## Code Snippet
-The below code illustrates how local storage is used to store and retrieve key/value pairs for players names and scores. 
-
-    // Store name to board
-    function storeName(event){
-        event.preventDefault();
-        var nameInput = userName.value
-        if (nameInput !== ""){
-            var nameScore = nameInput + " - " + scoreCounter;
-            localStorage.setItem("name-score", nameScore);
-            userName.value = "";
-            showHighScores();
-        } else {
-            alert("Please enter your name")
-        }
-    }
-
-    // Show high score page
-    function showHighScores(){
-        scorePage.style.display = "none";
-        highScorePage.style.display = "block";
-        nameScore = localStorage.getItem("name-score");
-        var listEl = document.createElement("p");
-        listEl.textContent = nameScore;
-        scoreList.appendChild(listEl);
-
-    }
 
 ## Site Picture
 ![Password Generator](Assets/HarryPotterQuiz.png)
